@@ -8,8 +8,8 @@ public class gcd {
 
     public static void main(String[] args) {
         int a, b, gcdPrimeFactor, gcdEucledian;
-        a = 4;
-        b = 2;
+        a = 8;
+        b = 4;
         gcdPrimeFactor = gcdPrimeFactors(a, b);
         gcdEucledian = gcdEucledian(a, b);
         System.out.printf("Prime Factors of %d, %d: %8d %4d\n", a, b, gcdPrimeFactor, gcdEucledian);
@@ -18,8 +18,8 @@ public class gcd {
         gcdPrimeFactor = gcdPrimeFactors(a, b);
         gcdEucledian = gcdEucledian(a, b);
         System.out.printf("Prime Factors of %d, %d: %8d %4d\n", a, b, gcdPrimeFactor, gcdEucledian);
-        a = 4825;
-        b = 3235;
+        a = 3235;
+        b = 4825;
         gcdPrimeFactor = gcdPrimeFactors(a, b);
         gcdEucledian = gcdEucledian(a, b);
         System.out.printf("Prime Factors of %d, %d: %2d %4d\n", a, b, gcdPrimeFactor, gcdEucledian);
@@ -31,25 +31,28 @@ public class gcd {
     }
 
     public static int gcdPrimeFactors(int a, int b) {
-        if (a % b == 0) {
-            return b;
-        } else {
-            return gcdPrimeFactors(b, a % b);
+        int factor = 2, gcd= 1, divid;
+        while (a%b != 0) {
+            divid = 0;
+            if(a%factor == 0){
+                a = a / factor;
+                divid++;
+            }
+            if(b%factor == 0){
+                b = b / factor;
+                divid++;
+            }
+            if(divid == 0) factor++;
+            if(divid == 2)gcd *= factor;
         }
+        return gcd*b;
     }
 
     public static int gcdEucledian(int a, int b) {
-        if (a == 0) {
-            return b;
+        if (b == 0) {
+            return a;
         }
-        while (b != 0) {
-            if (a > b) {
-                a = a - b;
-            } else {
-                b = b - a;
-            }
-        }
-        return a;
+        return gcdEucledian(b, a % b);
     }
 
 }
